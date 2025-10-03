@@ -1,0 +1,12 @@
+# .gitignore
+
+# Ignore dataset files - they are too large for Git
+dataset/
+
+# Ignore the saved model file
+*.h5
+
+# Python specific ignores
+__pycache__/
+venv/
+*.pyc
