@@ -167,11 +167,30 @@ model.summary()
 
 
 
-# Step 5: Compile and Train the Model
-# (This is where the training happens)
-print("Model training step is next...")
+# ######################################
+# ## NEW CODE STARTS HERE - STEP 5 & 6 ##
+# ######################################
 
+# --- Step 5: Compile and Train the Model ---
+print("\nCompiling the model...")
+model.compile(optimizer='adam', 
+              loss='categorical_crossentropy', 
+              metrics=['accuracy'])
 
-# Step 6: Save the Trained Model
-# (The final step of this script)
-print("Saving the model will be the final step.")
+print("Starting model training...")
+# This is where the training happens. It will take some time.
+history = model.fit(X_train, y_train, 
+                    epochs=10, 
+                    batch_size=32, 
+                    validation_data=(X_test, y_test))
+
+print("Model training complete!")
+
+# --- Step 6: Save the Trained Model ---
+print("Saving the trained model...")
+model.save('brain_tumor_model.h5')
+print("Model saved successfully as brain_tumor_model.h5")
+
+# ######################################
+# ## NEW CODE ENDS HERE - FINAL       ##
+# ######################################
