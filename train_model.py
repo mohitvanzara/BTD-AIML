@@ -19,12 +19,14 @@ dataset_path = 'dataset'
 IMG_WIDTH, IMG_HEIGHT = 150, 150
 # define the number of classes
 NUM_CLASSES = 4
-# Step 2: Load and Preprocess Data
-# (We will write this code together next)
-print("Data loading and preprocessing step is next...")
+
 # ######################################
 # ## NEW CODE STARTS HERE - STEP 2    ##
 # ######################################
+# Step 2: Load and Preprocess Data
+# (We will write this code together next)
+print("Data loading and preprocessing step is next...")
+
 def load_data(dataset_path, img_width, img_height):
     """
     Loads images and labels from the dataset directory.
@@ -87,15 +89,13 @@ print(f"Shape of labels (y): {y.shape}")
 # ## NEW CODE ENDS HERE - STEP 2      ##
 # ######################################
 
-# Step 3: Split the Data
-# (This will come after data loading)
-print("Data splitting step is next...")
 
 # ######################################
 # ## NEW CODE STARTS HERE - STEP 3    ##
 # ######################################
-
-# --- Step 3: Split the Data ---
+# Step 3: Split the Data
+# (This will come after data loading)
+print("Data splitting step is next...")
 
 # First, perform One-Hot Encoding on the labels
 y_one_hot = to_categorical(y, num_classes= NUM_CLASSES)
@@ -119,9 +119,52 @@ print(f"Shape of y_test: {y_test.shape}")
 # ## NEW CODE ENDS HERE - STEP 3      ##
 # ######################################
 
+
+# ######################################
+# ## NEW CODE STARTS HERE - STEP 4    ##
+# ######################################
 # Step 4: Build the CNN Model
 # (We will define the model architecture here)
 print("Model building step is next...")
+
+def build_model(input_shape, num_classes):
+    model = Sequential([
+        # First Convolutional Block
+        Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),
+        MaxPooling2D((2, 2)),
+
+        # Second Convolutional Block
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        
+        # Third Convolutional Block
+        Conv2D(128, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+
+        # Flatten the results to feed into a DNN
+        Flatten(),
+
+        # Dense Layer for decision making
+        Dense(128, activation='relu'),
+
+        # Output Layer
+        Dense(num_classes, activation='softmax') # softmax for multi-class classification
+    ])
+    return model
+
+# Create the model
+input_shape = (IMG_WIDTH, IMG_HEIGHT, 3) # 3 for RGB images
+model = build_model(input_shape, NUM_CLASSES)
+
+# Print the model summary
+print("Model built successfully! Here is the summary:")
+model.summary()
+
+
+# ######################################
+# ## NEW CODE ENDS HERE - STEP 4      ##
+# ######################################
+
 
 
 # Step 5: Compile and Train the Model
