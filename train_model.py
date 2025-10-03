@@ -17,8 +17,73 @@ print("Libraries imported successfully!")
 dataset_path = 'dataset' 
 # Define the image size for the model
 IMG_WIDTH, IMG_HEIGHT = 150, 150
+# define the number of classes
+NUM__CLASSES = 4
+# ######################################
+# ## NEW CODE STARTS HERE - STEP 2    ##
+# ######################################
+def load_data(dataset_path, img_width, img_height):
+    """
+    Loads images and labels from the dataset directory.
+    """
+    images = []
+    labels = []
+    # The order is important: glioma=0, meningioma = 1, notumor = 2 pituitary=3 as per sorted order
+    # We get this order from os.listdir, so let's sort it to be consistent
+    class_names = sorted(os.listdir(os.path.join(dataset_path, 'Training')))
+    # Correct Mapping based on alphabetical sort:
+    # 'glioma' -> 0
+    # 'meningioma' -> 1
+    # 'notumor' -> 2
+    # 'pituitary' -> 3
+    
+    print(f"Found classes: {class_names}")
 
-# --- Will be filled in the next steps ---
+    for folder_type in ['Training', 'Testing']:
+        folder_path = os.path.join(dataset_path, folder_type)
+        print(f"Loading data from: {folder_path}")
+
+        for class_name in class_names:
+            class_path = os.path.join(folder_path, class_name)
+            
+            if os.path.isdir(class_path):
+                # Get the numerical label
+                label = class_names.index(class_name)
+                
+                for image_file in os.listdir(class_path):
+                    image_path = os.path.join(class_path, image_file)
+                    
+                    try:
+                        # Read the image
+                        image = cv2.imread(image_path)
+                        # Resize the image
+                        image = cv2.resize(image, (img_width, img_height))
+                        # Normalize the image
+                        image = image / 255.0
+                        
+                        images.append(image)
+                        labels.append(label)
+                    except Exception as e:
+                        print(f"Error loading image {image_path}: {e}")
+
+    # Convert lists to numpy arrays
+    images = np.array(images)
+    labels = np.array(labels)
+    
+    return images, labels
+
+# --- Call the function to load data ---
+X, y = load_data(dataset_path, IMG_WIDTH, IMG_HEIGHT)
+
+print(f"Data loading complete!")
+print(f"Total images loaded: {X.shape[0]}")
+print(f"Shape of image data (X): {X.shape}")
+print(f"Shape of labels (y): {y.shape}")
+
+# ######################################
+# ## NEW CODE ENDS HERE - STEP 2      ##
+# ######################################
+
 
 # Step 2: Load and Preprocess Data
 # (We will write this code together next)
