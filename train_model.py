@@ -18,7 +18,10 @@ dataset_path = 'dataset'
 # Define the image size for the model
 IMG_WIDTH, IMG_HEIGHT = 150, 150
 # define the number of classes
-NUM__CLASSES = 4
+NUM_CLASSES = 4
+# Step 2: Load and Preprocess Data
+# (We will write this code together next)
+print("Data loading and preprocessing step is next...")
 # ######################################
 # ## NEW CODE STARTS HERE - STEP 2    ##
 # ######################################
@@ -84,16 +87,37 @@ print(f"Shape of labels (y): {y.shape}")
 # ## NEW CODE ENDS HERE - STEP 2      ##
 # ######################################
 
-
-# Step 2: Load and Preprocess Data
-# (We will write this code together next)
-print("Data loading and preprocessing step is next...")
-
-
 # Step 3: Split the Data
 # (This will come after data loading)
 print("Data splitting step is next...")
 
+# ######################################
+# ## NEW CODE STARTS HERE - STEP 3    ##
+# ######################################
+
+# --- Step 3: Split the Data ---
+
+# First, perform One-Hot Encoding on the labels
+y_one_hot = to_categorical(y, num_classes= NUM_CLASSES)
+
+# Now, split the data into training and testing sets (80% train, 20% test)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, 
+    y_one_hot, 
+    test_size=0.2, 
+    random_state=42 # random_state ensures the split is the same every time
+)
+
+print("Data splitting complete!")
+print(f"Shape of X_train: {X_train.shape}")
+print(f"Shape of y_train: {y_train.shape}")
+print(f"Shape of X_test: {X_test.shape}")
+print(f"Shape of y_test: {y_test.shape}")
+
+
+# ######################################
+# ## NEW CODE ENDS HERE - STEP 3      ##
+# ######################################
 
 # Step 4: Build the CNN Model
 # (We will define the model architecture here)
