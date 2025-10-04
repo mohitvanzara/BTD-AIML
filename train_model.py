@@ -1,4 +1,4 @@
-# train_model.py
+
 
 # Step 1: Import necessary libraries
 import os
@@ -20,11 +20,10 @@ IMG_WIDTH, IMG_HEIGHT = 150, 150
 # define the number of classes
 NUM_CLASSES = 4
 
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 2    ##
-# ######################################
+
 # Step 2: Load and Preprocess Data
 # (We will write this code together next)
+
 print("Data loading and preprocessing step is next...")
 
 def load_data(dataset_path, img_width, img_height):
@@ -85,16 +84,12 @@ print(f"Total images loaded: {X.shape[0]}")
 print(f"Shape of image data (X): {X.shape}")
 print(f"Shape of labels (y): {y.shape}")
 
-# ######################################
-# ## NEW CODE ENDS HERE - STEP 2      ##
-# ######################################
+# CODE ENDS HERE - STEP 2
 
 
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 3    ##
-# ######################################
 # Step 3: Split the Data
 # (This will come after data loading)
+
 print("Data splitting step is next...")
 
 # First, perform One-Hot Encoding on the labels
@@ -114,17 +109,13 @@ print(f"Shape of y_train: {y_train.shape}")
 print(f"Shape of X_test: {X_test.shape}")
 print(f"Shape of y_test: {y_test.shape}")
 
-
-# ######################################
-# ## NEW CODE ENDS HERE - STEP 3      ##
-# ######################################
+# CODE ENDS HERE - STEP 3
 
 
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 4    ##
-# ######################################
+
 # Step 4: Build the CNN Model
 # (We will define the model architecture here)
+
 print("Model building step is next...")
 
 def build_model(input_shape, num_classes):
@@ -160,16 +151,11 @@ model = build_model(input_shape, NUM_CLASSES)
 print("Model built successfully! Here is the summary:")
 model.summary()
 
-
-# ######################################
-# ## NEW CODE ENDS HERE - STEP 4      ##
-# ######################################
+# CODE ENDS HERE - STEP 4
 
 
 
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 5 & 6 ##
-# ######################################
+
 
 # --- Step 5: Compile and Train the Model ---
 print("\nCompiling the model...")
@@ -190,7 +176,3 @@ print("Model training complete!")
 print("Saving the trained model...")
 model.save('brain_tumor_model.h5')
 print("Model saved successfully as brain_tumor_model.h5")
-
-# ######################################
-# ## NEW CODE ENDS HERE - FINAL       ##
-# ######################################
