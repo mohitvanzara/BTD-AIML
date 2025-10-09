@@ -20,9 +20,6 @@ IMG_WIDTH, IMG_HEIGHT = 150, 150
 # define the number of classes
 NUM_CLASSES = 4
 
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 2    ##
-# ######################################
 # Step 2: Load and Preprocess Data
 # (We will write this code together next)
 print("Data loading and preprocessing step is next...")
@@ -41,30 +38,31 @@ def load_data(dataset_path, img_width, img_height):
     # 'meningioma' -> 1
     # 'notumor' -> 2
     # 'pituitary' -> 3
+    # label pan aaj order ma malshe
     
     print(f"Found classes: {class_names}")
 
     for folder_type in ['Training', 'Testing']:
-        folder_path = os.path.join(dataset_path, folder_type)
+        folder_path = os.path.join(dataset_path, folder_type)  # Ex : Folder_path = 'dataset/Training'
         print(f"Loading data from: {folder_path}")
 
         for class_name in class_names:
-            class_path = os.path.join(folder_path, class_name)
+            class_path = os.path.join(folder_path, class_name) # Ex: class_path = 'dataset/Training/glioma'
             
             if os.path.isdir(class_path):
                 # Get the numerical label
                 label = class_names.index(class_name)
                 
-                for image_file in os.listdir(class_path):
-                    image_path = os.path.join(class_path, image_file)
+                for image_file in os.listdir(class_path): 
+                    image_path = os.path.join(class_path, image_file) # Ex :image_path = 'dataset/Training/glioma/g1.jpg'
                     
                     try:
                         # Read the image
-                        image = cv2.imread(image_path)
+                        image = cv2.imread(image_path)  # EX :  'g1.jpg' image read thashe
                         # Resize the image
-                        image = cv2.resize(image, (img_width, img_height))
+                        image = cv2.resize(image, (img_width, img_height)) # EX :  'g1.jpg' image ni size 150*150 karva 
                         # Normalize the image
-                        image = image / 255.0
+                        image = image / 255.0 # renge( 0.0 to 1.0)
                         
                         images.append(image)
                         labels.append(label)
@@ -81,23 +79,17 @@ def load_data(dataset_path, img_width, img_height):
 X, y = load_data(dataset_path, IMG_WIDTH, IMG_HEIGHT)
 
 print(f"Data loading complete!")
-print(f"Total images loaded: {X.shape[0]}")
-print(f"Shape of image data (X): {X.shape}")
-print(f"Shape of labels (y): {y.shape}")
-
-# ######################################
-# ## NEW CODE ENDS HERE - STEP 2      ##
-# ######################################
+print(f"Total images loaded: {X.shape[0]}") # 7023 
+print(f"Shape of image data (X): {X.shape}") # (7023, 150, 150, 3)
+print(f"Shape of labels (y): {y.shape}") # (7023,)
 
 
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 3    ##
-# ######################################
 # Step 3: Split the Data
 # (This will come after data loading)
 print("Data splitting step is next...")
 
 # First, perform One-Hot Encoding on the labels
+# label ko ek binary vector (0s aur 1s ka array) 
 y_one_hot = to_categorical(y, num_classes= NUM_CLASSES)
 
 # Now, split the data into training and testing sets (80% train, 20% test)
@@ -109,20 +101,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 print("Data splitting complete!")
-print(f"Shape of X_train: {X_train.shape}")
-print(f"Shape of y_train: {y_train.shape}")
-print(f"Shape of X_test: {X_test.shape}")
+print(f"Shape of X_train: {X_train.shape}") # X_train.shape (5618, 150, 150, 3)
+print(f"Shape of y_train: {y_train.shape}") 
+print(f"Shape of X_test: {X_test.shape}") # X_test.shape (1405, 150, 150, 3
 print(f"Shape of y_test: {y_test.shape}")
 
 
-# ######################################
-# ## NEW CODE ENDS HERE - STEP 3      ##
-# ######################################
 
-
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 4    ##
-# ######################################
 # Step 4: Build the CNN Model
 # (We will define the model architecture here)
 print("Model building step is next...")
@@ -161,16 +146,6 @@ print("Model built successfully! Here is the summary:")
 model.summary()
 
 
-# ######################################
-# ## NEW CODE ENDS HERE - STEP 4      ##
-# ######################################
-
-
-
-# ######################################
-# ## NEW CODE STARTS HERE - STEP 5 & 6 ##
-# ######################################
-
 # --- Step 5: Compile and Train the Model ---
 print("\nCompiling the model...")
 model.compile(optimizer='adam', 
@@ -191,6 +166,3 @@ print("Saving the trained model...")
 model.save('brain_tumor_model.h5')
 print("Model saved successfully as brain_tumor_model.h5")
 
-# ######################################
-# ## NEW CODE ENDS HERE - FINAL       ##
-# ######################################
