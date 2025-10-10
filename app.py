@@ -1,4 +1,3 @@
-#(Final Version with Prediction Logic)
 
 import streamlit as st
 import tensorflow as tf
