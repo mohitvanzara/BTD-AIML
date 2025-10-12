@@ -98,4 +98,3 @@ The CNN model was trained on the [Brain Tumor MRI Dataset](https://www.kaggle.co
 ##  Disclaimer
 
 This project is developed for educational and demonstration purposes only. The predictions made by the AI model are not a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for any medical concerns.
-````
