@@ -1,5 +1,3 @@
-# train_model.py
-
 # Step 1: Import necessary libraries
 import os
 import numpy as np
