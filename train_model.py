@@ -1,5 +1,3 @@
-
-
 # Step 1: Import necessary libraries
 import os
 import numpy as np
@@ -22,7 +20,6 @@ NUM_CLASSES = 4
 
 
 # Step 2: Load and Preprocess Data
-# (We will write this code together next)
 
 print("Data loading and preprocessing step is next...")
 
@@ -86,11 +83,7 @@ print(f"Shape of image data (X): {X.shape}") # (7023, 150, 150, 3)
 print(f"Shape of labels (y): {y.shape}") # (7023,)
 
 
-# CODE ENDS HERE - STEP 2
-
-
 # Step 3: Split the Data
-# (This will come after data loading)
 
 print("Data splitting step is next...")
 
@@ -124,7 +117,6 @@ print(f"Shape of y_test: {y_test.shape}") # y_test.shape (1405,4)
 
 
 # Step 4: Build the CNN Model
-# (We will define the model architecture here)
 
 print("Model building step is next...")
 
@@ -161,11 +153,6 @@ model = build_model(input_shape, NUM_CLASSES)
 # Print the model summary
 print("Model built successfully! Here is the summary:")
 model.summary()
-
-# CODE ENDS HERE - STEP 4
-
-
-
 
 
 # --- Step 5: Compile and Train the Model ---
